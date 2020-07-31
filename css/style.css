@@ -1,0 +1,46 @@
+* {
+    background-color: red;
+}
+
+h1 {
+    color: white;
+    margin: 200px auto;
+    display: flex;
+    justify-content: center;
+}
+
+#pizza {
+    display: flex;
+    justify-content: center;
+    margin-top: -100px;
+}
+
+#pizza > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.crust {
+    height: 400px;
+    width: 400px;
+    border-radius: 100%;
+    background-color: rgb(65, 0, 0);
+}
+
+.sauce {
+    height: 380px;
+    width: 380px;
+    border-radius: 100%;
+    background-color: rgb(152, 36, 36);
+    transform: translate(0, 0.5px);
+}
+
+.cheese {
+    height: 360px;
+    width: 360px;
+    border-radius: 100%;
+    background-color: rgb(217, 222, 122);
+    transform: translate(10px, 10px);
+}
