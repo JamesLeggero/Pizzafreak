@@ -13,6 +13,30 @@ const gameLogic = {
     },
     tipPlayer: (player, tipMoney)=>{
         player.money += tipMoney;
+    },
+    comparePizzas: (customer, player) => {
+        const customerToppingObjArr = Array.from(Object.values(customer.favToppings))
+        const customerToppingList = [];
+        for (let i = 0; i < 4; i++) {
+            customerToppingList.push(customerToppingObjArr[i].name)
+        }
+        const sortedCustomerFave = Array.from(customerToppingList).sort()
+        console.log(customerToppingList, sortedCustomerFave)
+
+        const playerConstructedObjArr = Array.from(Object.values(player.constructedPizza))
+        const playerConstructedList = [];
+        for (let i = 0; i < 4; i++) {
+            playerConstructedList.push(playerConstructedObjArr[i].name)
+        }
+        const sortedPlayerConstructed = Array.from(playerConstructedList).sort()
+        console.log(playerConstructedList, sortedPlayerConstructed)
+
+        for (let i = 0; i < 4; i++) {
+            if (sortedCustomerFave[i].localeCompare(sortedPlayerConstructed[i]) !== 0) {
+              return false;
+            }
+          }
+          return true
     }
 }
 
@@ -21,7 +45,7 @@ const gameAssets = {
         constructor(name, isMeat) {
             this.name = name;
             this.isMeat = isMeat;
-            this.onPlayerPizza = false;
+            // this.onPlayerPizza = false;
         }
     },
     makeToppingList: ()=>{
@@ -81,6 +105,10 @@ const margaret = new gameAssets.customer('Margaret')
 const michelle = new gameAssets.customer('Michelle')
 
 const player1 = new gameAssets.player('Player 1')
+player1.constructedPizza.push(toppingsList[gameLogic.randGen(toppingsList.length)])
+player1.constructedPizza.push(toppingsList[gameLogic.randGen(toppingsList.length)])
+player1.constructedPizza.push(toppingsList[gameLogic.randGen(toppingsList.length)])
+player1.constructedPizza.push(toppingsList[gameLogic.randGen(toppingsList.length)])
 const player2 = new gameAssets.player('Player 2')
 
 console.log(ruthie)
