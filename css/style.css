@@ -2,17 +2,19 @@
     background-color: red;
 }
 
-h1 {
+.text {
     color: white;
-    margin: 200px auto;
+    margin: 100px auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #pizza {
     display: flex;
     justify-content: center;
-    margin-top: -100px;
+    margin-top: -50px;
 }
 
 #pizza > div {
