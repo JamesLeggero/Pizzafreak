@@ -15,28 +15,47 @@ const gameLogic = {
         player.money += tipMoney;
     },
     comparePizzas: (customer, player) => {
+
+        //making and sorting two lists based on the names of the customer toppings and player toppings
         const customerToppingObjArr = Array.from(Object.values(customer.favToppings))
         const customerToppingList = [];
         for (let i = 0; i < 4; i++) {
             customerToppingList.push(customerToppingObjArr[i].name)
         }
-        const sortedCustomerFave = Array.from(customerToppingList).sort()
-        console.log(customerToppingList, sortedCustomerFave)
+        // const sortedCustomerFave = Array.from(customerToppingList).sort()
+        // console.log(customerToppingList, sortedCustomerFave)
 
         const playerConstructedObjArr = Array.from(Object.values(player.constructedPizza))
         const playerConstructedList = [];
         for (let i = 0; i < 4; i++) {
             playerConstructedList.push(playerConstructedObjArr[i].name)
         }
-        const sortedPlayerConstructed = Array.from(playerConstructedList).sort()
-        console.log(playerConstructedList, sortedPlayerConstructed)
+    
+        // console.log(customerToppingList, playerConstructedList)
 
-        for (let i = 0; i < 4; i++) {
-            if (sortedCustomerFave[i].localeCompare(sortedPlayerConstructed[i]) !== 0) {
-              return false;
-            }
-          }
-          return true
+        //making the difference lists and evaluating them
+
+        const $whatCustomerWanted = $(customerToppingList).not(playerConstructedList)
+        const $whatPlayerMade = $(playerConstructedList).not(customerToppingList)
+
+        console.log($whatCustomerWanted, $whatCustomerWanted.length)
+        console.log($whatPlayerMade[0])
+        
+        if ($whatCustomerWanted.length > 2) {
+            console.log('You really screwed up my order. I want a refund!')
+            player.money -= 15
+        } else if ($whatCustomerWanted.length === 2) {
+            console.log(`You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead.`)
+        } else if ($whatPlayerMade.length === 1) {
+            console.log(`It's not perfect, but you did ok. I wanted $${whatCustomerWanted[0]} but you gave me ${$whatPlayerMade[0]} instead.`)
+                player.money += 2
+        } else {
+            console.log("Nice job... the perfect pizza!")
+                player.money += 5
+        }
+        
+        // console.log('Player money :', player.money)
+        // console.log($whatCustomerWanted, $whatPlayerMade)
     }
 }
 
@@ -88,7 +107,8 @@ const gameAssets = {
         constructor(name) {
             this.name = name;
             this.money = 0;
-            this.constructedPizza = []
+            this.constructedPizza = [];
+            this.autoLoss = false
         }
     },
 }
