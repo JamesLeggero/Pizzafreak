@@ -71,6 +71,15 @@ const gameLogic = {
             }
         }
         
+    },
+    askForPizza: (customer, player)=>{
+        if (day === 0) {
+            console.log(`Hi ${player.name}! My name is ${customer.name}. Can you please make me a pizza with ${customer.favToppings[0].name}, ${customer.favToppings[1].name}, ${customer.favToppings[2].name}, and ${customer.favToppings[3].name}? Thanks!`)
+        } else {
+            console.log(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
+        }
+
+
     }
 }
 
@@ -138,6 +147,8 @@ const chris = new gameAssets.customer('Chris')
 const greg = new gameAssets.customer('Greg')
 const margaret = new gameAssets.customer('Margaret')
 const michelle = new gameAssets.customer('Michelle')
+
+const fullCustomerList = [ruthie, kathleen, chris, greg, margaret, michelle]
 
 const player1 = new gameAssets.player('Player 1')
 player1.constructedPizza.push(toppingsList[gameLogic.randGen(toppingsList.length)])
