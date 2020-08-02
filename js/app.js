@@ -22,8 +22,7 @@ const gameLogic = {
         for (let i = 0; i < 4; i++) {
             customerToppingList.push(customerToppingObjArr[i].name)
         }
-        // const sortedCustomerFave = Array.from(customerToppingList).sort()
-        // console.log(customerToppingList, sortedCustomerFave)
+        
 
         const playerConstructedObjArr = Array.from(Object.values(player.constructedPizza))
         const playerConstructedList = [];
@@ -31,31 +30,32 @@ const gameLogic = {
             playerConstructedList.push(playerConstructedObjArr[i].name)
         }
     
-        // console.log(customerToppingList, playerConstructedList)
+        console.log(customerToppingList, playerConstructedList)
 
         //making the difference lists and evaluating them
 
         const $whatCustomerWanted = $(customerToppingList).not(playerConstructedList)
         const $whatPlayerMade = $(playerConstructedList).not(customerToppingList)
 
-        console.log($whatCustomerWanted, $whatCustomerWanted.length)
-        console.log($whatPlayerMade[0])
+
+        console.log($whatCustomerWanted)
+        console.log($whatPlayerMade)
         
         if ($whatCustomerWanted.length > 2) {
             console.log('You really screwed up my order. I want a refund!')
-            player.money -= 15
+            gameLogic.tipPlayer(player, -15)
         } else if ($whatCustomerWanted.length === 2) {
             console.log(`You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead.`)
-        } else if ($whatPlayerMade.length === 1) {
-            console.log(`It's not perfect, but you did ok. I wanted $${whatCustomerWanted[0]} but you gave me ${$whatPlayerMade[0]} instead.`)
-                player.money += 2
+        } else if ($whatCustomerWanted.length === 1) {
+            console.log(`It's not perfect, but you did ok. I wanted ${$whatCustomerWanted[0]}, but you gave me ${$whatPlayerMade[0]} instead.`)
+                gameLogic.tipPlayer(player, 2)
         } else {
             console.log("Nice job... the perfect pizza!")
-                player.money += 5
+                gameLogic.tipPlayer(player, 5)
         }
         
-        // console.log('Player money :', player.money)
-        // console.log($whatCustomerWanted, $whatPlayerMade)
+        console.log('Player money :', player.money)
+        console.log($whatCustomerWanted, $whatPlayerMade)
     }
 }
 
