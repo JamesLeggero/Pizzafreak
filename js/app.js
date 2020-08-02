@@ -1,9 +1,6 @@
 // console.log($)
 
 
-
-//Game Assets
-
 const gameLogic = {
     randGen: (num)=>{
         return Math.floor(Math.random() * num)
@@ -14,6 +11,37 @@ const gameLogic = {
     tipPlayer: (player, tipMoney)=>{
         player.money += tipMoney;
     },
+    playerMakesPizza: (player)=>{
+        player.constructedPizza = []
+        // gameAssets.makeToppingList()
+        for (let i = 0; i < toppingsList.length; i++) {
+            toppingsList[i].onPlayerPizza = false;
+        }
+        while (player.constructedPizza.length < 4) {
+            if (player.constructedPizza.length === 0) {
+                window.alert("Let's put on some toppings!")
+            }
+            let input = window.prompt(`What would you like to put on the pizza? Type: 1 for ${toppingsList[0].name}, 2 for ${toppingsList[1].name}, 3 for ${toppingsList[2].name}, 4 for ${toppingsList[3].name}, 5 for ${toppingsList[4].name}, 6 for ${toppingsList[5].name}, 7 for ${toppingsList[6].name}, 8 for ${toppingsList[7].name}, 9 for ${toppingsList[8].name}, or 10 for ${toppingsList[9].name},`)
+            input--;
+            if (toppingsList[input].onPlayerPizza === true) {
+                window.alert(`${toppingsList[input].name} is already on your pizza`)
+            } else {
+                toppingsList[input].onPlayerPizza = true;
+                player.constructedPizza.push(toppingsList[input])
+            }
+            if (player.constructedPizza.length === 1) {
+                window.alert(`Your pizza currently has ${player.constructedPizza[0].name} on it.`)
+            } else if (player.constructedPizza.length === 2) {
+                window.alert(`Your pizza currently has ${player.constructedPizza[0].name} and ${player.constructedPizza[1].name} on it.`)
+            } else if (player.constructedPizza.length === 3) {
+                window.alert(`Your pizza currently has ${player.constructedPizza[0].name}, ${player.constructedPizza[1].name}, and ${player.constructedPizza[2].name} on it.`)
+            } else {
+                window.alert(`Your pizza currently has ${player.constructedPizza[0].name}, ${player.constructedPizza[1].name}, ${player.constructedPizza[2].name},and ${player.constructedPizza[3].name} on it.`)
+            }
+        }
+        window.alert('Ok! Time to see how you did!')
+    },
+
     comparePizzas: (customer, player) => {
 
         //making and sorting two lists based on the names of the customer toppings and player toppings
@@ -78,8 +106,6 @@ const gameLogic = {
         } else {
             console.log(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
         }
-
-
     }
 }
 
@@ -88,7 +114,7 @@ const gameAssets = {
         constructor(name, isMeat) {
             this.name = name;
             this.isMeat = isMeat;
-            // this.onPlayerPizza = false;
+            this.onPlayerPizza = false;
         }
     },
     makeToppingList: ()=>{
@@ -108,7 +134,7 @@ const gameAssets = {
         return toppingsList
     },
     makeCustomerToppings: ()=>{
-        const toppingsList = gameAssets.makeToppingList()
+        // const toppingsList = gameAssets.makeToppingList()
         const favToppingsSet = new Set()
         while (favToppingsSet.size < 4) {
             favToppingsSet.add(toppingsList[gameLogic.randGen(toppingsList.length)])
