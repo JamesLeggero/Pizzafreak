@@ -56,6 +56,21 @@ const gameLogic = {
         
         console.log('Player money :', player.money)
         console.log($whatCustomerWanted, $whatPlayerMade)
+    },
+    checkAutoLoss: ()=>{
+        if (player1.money < 0 && player2.money < 0){
+            console.log('You two are a disgrace! Even my cat makes better pizzas than you. Both of you, vamoose!')
+            setTimeout(()=>{window.alert('Yikes! You both lost. Better luck next time.')}, 3000)
+        } else if (player1.money < 0 || player2.money < 0){
+            if (player1.money < 0) {
+                console.log(`${player1.name}, you're outta here! You're costing me way too much money! ${player2.name}, you're hired!`)
+                setTimeout(()=>{window.alert(`Great job, ${player2.name}! Enjoy your win with a delicious pizza.`)}, 3000)
+            } else {
+                console.log(`${player2.name}, get lost! You're makin' me go into debt. ${player1.name}, you're hired!`)
+                setTimeout(()=>{window.alert(`Congrats, ${player1.name}! You're the pizza champ.`)}, 3000)
+            }
+        }
+        
     }
 }
 
@@ -95,9 +110,9 @@ const gameAssets = {
     customer: class Customer {
         constructor(name) {
             this.name = name;
-            this.favToppings = gameAssets.makeCustomerToppings()
             this.isVegetarian = false;
             //for now, hardcoded. Veggie mode is a stretch
+            this.favToppings = gameAssets.makeCustomerToppings()
         }
         sayHello() {
             console.log(`Hello, I\'m ${this.name}`);
