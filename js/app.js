@@ -221,11 +221,10 @@ const gameAssets = {
     },
 }
 
-const position1 = 'left: 750px; top: 520px';
-const position2 = 'left: 790px; top: 675px';
-const position2 = 'left: 645px; top: 725px';
-
-const position4 = 'left: 565px; top: 575px';
+const position1 = 'left: 690px; top: 65px';
+const position2 = 'left: 760px; top: 155px';
+const position3 = 'left: 610px; top: 220px';
+const position4 = 'left: 540px; top: 65px';
 
 gameAssets.makeToppingList()
 
