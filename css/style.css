@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.toppings {
+.toppingPan {
     height: 450px;
     width: 450px;
     position: relative;
@@ -90,7 +90,6 @@
     position: absolute;
     left: 20px;
     top: 80px;
-
 }
 
 
@@ -102,9 +101,7 @@
     border-radius: 100%;
     position: absolute;
     left: 20px;
-    top: 160px;
-    
-    
+    top: 160px;  
 }
 
 #tomatoText{
@@ -112,7 +109,6 @@
     position: absolute;
     left: 20px;
     top: 220px;
-
 }
 
 #hots {
@@ -123,9 +119,6 @@
     position: absolute;
     left: 20px;
     top: 300px;
-    
-    
-
 }
 #hotsText{
     background-color: silver;
@@ -133,6 +126,35 @@
     position: absolute;
     left: 20px;
     top: 360px;
+}
 
+#broccoli {
+    height: 75px;
+    width: 75px;
+    background-color: darkgreen;
+    border-radius: 100%;
+    position: absolute;
+    left: 120px; top: 80px;
+}
+#broccoliText{
+    width: 0;
+    position: absolute;
+    left: 120px;
+    top: 140px;
+}
+
+#pineapple {
+    height: 75px;
+    width: 60px;
+    background-color: yellow;
+    position: absolute;
+    left: 120px; top: 270px;
+
+}
+#pineappleText{
+    width: 0;
+    position: absolute;
+    left: 120px;
+    top: 330px;
 }
 

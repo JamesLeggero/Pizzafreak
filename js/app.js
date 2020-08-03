@@ -169,7 +169,7 @@ const gameLogic = {
 
 const gameAssets = {
     topping: class Topping {
-        constructor(name, isMeat, position) {
+        constructor(name, isMeat, position = '0 0') {
             this.name = name;
             this.isMeat = isMeat;
             this.onPlayerPizza = false;
@@ -180,15 +180,15 @@ const gameAssets = {
         const onions = new gameAssets.topping('onions', false, 'left: 20px; top: 20px');
         const tomatoes = new gameAssets.topping('tomatoes', false, 'left: 20px; top: 160px');
         const hots = new gameAssets.topping('hot peppers', false, 'left: 20px; top: 300px');
-        const broccoli = new gameAssets.topping('broccoli', false);
-        const pineapple = new gameAssets.topping('pineapples', false);
+        const broccoli = new gameAssets.topping('broccoli', false, 'left: 120px; top: 80px;');
+        const pineapple = new gameAssets.topping('pineapples', false, 'left: 120px; top: 270px;');
         const pepperoni = new gameAssets.topping('pepperoni', true);
         const sausage = new gameAssets.topping('sausage', true);
         const ham = new gameAssets.topping('ham', true);
         const bacon = new gameAssets.topping('bacon', true);
         const chicken = new gameAssets.topping('chicken', true);
 
-        toppingsList = [onions, hots, tomatoes, broccoli, pineapple, pepperoni, sausage, ham, bacon, chicken]
+        toppingsList = [onions, tomatoes, hots, broccoli, pineapple, pepperoni, sausage, ham, bacon, chicken]
 
         return toppingsList
     },
@@ -222,10 +222,33 @@ const gameAssets = {
     },
 }
 
-const position1 = 'left: 690px; top: 65px';
+// const $topping = $('.topping')
+
+
+
+
+
+// $onions.css('background-color', 'blue')
+
+// const clickedElement = () => {
+//     $topping.on('click', console.log('element was clicked'))}
+
+// const moveToppingToPizza = event =>{
+//     $(event.currentTarget).attr('')
+// }
+
+const position1Left = '690px' 
+const position1Top = '65px'
 const position2 = 'left: 760px; top: 230px';
 const position3 = 'left: 610px; top: 300px';
 const position4 = 'left: 540px; top: 140px';
+
+const $topping = $('.topping')
+const logClick = (event)=>{
+    console.log('clicked', event.currentTarget)
+    $(event.currentTarget).css('left', position1Left).css('top', position1Top)
+}
+$topping.on('click', logClick)
 
 gameAssets.makeToppingList()
 
@@ -258,8 +281,10 @@ console.log('Please type the following to play:')
 console.log('gameLogic.fullGame()')
 console.log('Reload (Command-R) when the game is over to play again')
 
+
+
+
 $( ()=>{
     
-
     
 });
