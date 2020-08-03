@@ -1,16 +1,68 @@
 * {
-    background-color: red;
+    background-color: rgb(253, 223, 223);
+    font-family: 'Press Start 2P', cursive;
 }
 
-.text {
+/* .text {
     color: white;
     margin: 100px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+} */
+
+.textArea {
+    /* border: 1px solid gold; */
+    margin-top: 15px;
+    height: 400px;
+    /* background-color: pink; */
 }
-.container {
+.dialogue{
+    height: 250px;
+    text-align: center;
+    background-color: none;
+}
+.playerScores{
+
+    display: flex;
+    
+    justify-content: space-around;
+    
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 90px;
+    width: 45%;
+    padding: 10px;
+    border: 5px solid black;
+    border-radius: 20px;
+}
+#player1{
+    background-color: lightblue;
+}
+#player2 {
+    background-color: lightgreen;
+}
+
+.playerName, .scoreText, span {
+
+    background-color: transparent;
+}
+.playerName {
+    text-align: center;
+}
+.scoreText{
+    /* padding: 0 30px;
+    bottom: -20px; */
+}
+span {
+    float: right;
+}
+.pizzaArea {
     padding: 0 23px;
     width: 900px;
     height: 500px;
@@ -19,6 +71,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 3px solid black;
+    border-radius: 20px;
 }
 .toppingPan {
     height: 450px;

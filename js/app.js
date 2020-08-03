@@ -238,18 +238,32 @@ const gameAssets = {
 // }
 gameAssets.makeToppingList()
 
-const position1Left = '690px' 
-const position1Top = '65px'
-const position2 = 'left: 760px; top: 230px';
-const position3 = 'left: 610px; top: 300px';
-const position4 = 'left: 540px; top: 140px';
+const position0 = 'left: 690px; top: 65px;'; 
+const position1 = 'left: 760px; top: 230px';
+const position2 = 'left: 610px; top: 300px';
+const position3 = 'left: 540px; top: 140px';
 
 const $topping = $('.topping')
 const moveToppingToPizza = (event)=>{
+    const toppingObject = toppingsList[$topping.index(event.currentTarget)]
+    console.log(toppingObject.name)
     console.log('clicked', event.currentTarget)
-    $(event.currentTarget).css('left', position1Left).css('top', position1Top)
-    const toppingObject = $topping.index(event.currentTarget)
-    console.log(toppingsList[toppingObject].name)
+    
+    if (player1.constructedPizza.length === 0) {
+        $(event.currentTarget).attr('style', position0)
+        player1.constructedPizza.push(toppingObject.name)
+    } else if (player1.constructedPizza.length === 1) {
+        $(event.currentTarget).attr('style', position1)
+        player1.constructedPizza.push(toppingObject.name)
+    } else if (player1.constructedPizza.length === 2) {
+        $(event.currentTarget).attr('style', position2)
+        player1.constructedPizza.push(toppingObject.name)
+    } else if (player1.constructedPizza.length === 3) {
+        $(event.currentTarget).attr('style', position3)
+        player1.constructedPizza.push(toppingObject.name)
+    }
+    console.log(player1.constructedPizza)
+    
 }
 $topping.on('click', moveToppingToPizza)
 
