@@ -221,6 +221,12 @@ const gameAssets = {
     },
 }
 
+const position1 = 'left: 750px; top: 520px';
+const position2 = 'left: 790px; top: 675px';
+const position2 = 'left: 645px; top: 725px';
+
+const position4 = 'left: 565px; top: 575px';
+
 gameAssets.makeToppingList()
 
 let day = 0;
