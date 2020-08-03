@@ -128,6 +128,9 @@ span {
 #line4 {
     transform: translate(177.5px, -1255px) rotate(135deg);
 }
+.topping{
+    border: 2px solid black;
+}
 
 
 #onions {
@@ -136,8 +139,7 @@ span {
     background-color: ghostwhite;
     border-radius: 100%;
     position: absolute;
-    left: 20px;
-    top: 20px;
+    left: 20px; top: 20px;
 }
 #onionText{
     width: 0;
@@ -154,8 +156,7 @@ span {
     background-color: red;
     border-radius: 100%;
     position: absolute;
-    left: 20px;
-    top: 160px;  
+    left: 20px; top: 160px;  
 }
 
 #tomatoText{
@@ -171,11 +172,9 @@ span {
     background-color: green;
     border-radius: 100%;
     position: absolute;
-    left: 20px;
-    top: 300px;
+    left: 20px; top: 300px;
 }
 #hotsText{
-    background-color: silver;
     width: 170px;
     position: absolute;
     left: 20px;
@@ -210,5 +209,112 @@ span {
     position: absolute;
     left: 120px;
     top: 330px;
+}
+
+#pepperoni {
+    height: 75px;
+    width: 75px;
+    background-color: rgb(128, 32, 32);
+    border-radius: 100%;
+    position: absolute;
+    right: 120px; top: 20px;
+}
+#pepperoniText{
+    width: 0;
+    position: absolute;
+    right: 235px;
+    top: 80px;
+}
+
+#sausage {
+    height: 75px;
+    width: 75px;
+    background-color: rgb(107, 21, 21);
+    border-radius: 100%;
+    position: absolute;
+    right: 120px; top: 160px;  
+}
+
+#sausageText{
+    width: 0;
+    position: absolute;
+    right: 215px;
+    top: 220px;
+}
+
+#ham {
+    height: 75px;
+    width: 60px;
+    background-color: pink;
+    border-radius: 70%;
+    position: absolute;
+    right: 127.5px; top: 300px;
+}
+#hamText{
+    width: 0px;
+    position: absolute;
+    right: 178.5px;
+    top: 360px;
+}
+
+
+
+
+
+
+
+
+
+
+#bacon{
+    height: 75px;
+    width: 60px;
+    background-color: rgb(90, 30, 30);
+    position: absolute;
+    right: 23px; top: 80px;
+}
+#baconMiddle{
+    height: 75px;
+    width: 5px;
+    background-color: rgb(202, 152, 160);
+    position: absolute;
+    margin-left: 27.5px;
+
+
+}
+#baconText {
+    width: 0;
+    position: absolute;
+    right: 88px;
+    top: 140px;
+}
+
+#chicken {
+    height: 75px;
+    width: 75px;
+    background-color: rgb(214, 184, 189);
+    border-radius: 100%;
+    position: absolute;
+    right: 20px; top: 270px;  
+}
+
+#chickenText{
+    width: 0;
+    position: absolute;
+    right: 113px;
+    top: 330px;
+}
+
+
+
+
+
+
+
+
+
+
+.toppingText {
+    background-color: transparent;
 }
 
