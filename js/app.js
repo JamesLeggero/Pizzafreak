@@ -236,6 +236,7 @@ const gameAssets = {
 // const moveToppingToPizza = event =>{
 //     $(event.currentTarget).attr('')
 // }
+gameAssets.makeToppingList()
 
 const position1Left = '690px' 
 const position1Top = '65px'
@@ -244,13 +245,15 @@ const position3 = 'left: 610px; top: 300px';
 const position4 = 'left: 540px; top: 140px';
 
 const $topping = $('.topping')
-const logClick = (event)=>{
+const moveToppingToPizza = (event)=>{
     console.log('clicked', event.currentTarget)
     $(event.currentTarget).css('left', position1Left).css('top', position1Top)
+    const toppingObject = $topping.index(event.currentTarget)
+    console.log(toppingsList[toppingObject].name)
 }
-$topping.on('click', logClick)
+$topping.on('click', moveToppingToPizza)
 
-gameAssets.makeToppingList()
+
 
 let day = 0;
 
