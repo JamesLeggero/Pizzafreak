@@ -23,6 +23,7 @@
 .toppings {
     height: 450px;
     width: 450px;
+    position: relative;
     justify-self: flex-start;
     background-color: silver;
     border: solid grey 5px;
@@ -80,26 +81,38 @@
     width: 75px;
     background-color: ghostwhite;
     border-radius: 100%;
-    position: relative;
+    position: absolute;
     left: 20px;
     top: 20px;
-    /* left: 690px;
-    top: 65px; */
-    
 }
+#onionText{
+    width: 0;
+    position: absolute;
+    left: 20px;
+    top: 80px;
+
+}
+
+
 
 #tomatoes {
     height: 75px;
     width: 75px;
     background-color: red;
     border-radius: 100%;
-    position: relative;
+    position: absolute;
     left: 20px;
-    top: 50px;
-    left: 540px;
-    top: 65px;
+    top: 160px;
     
     
+}
+
+#tomatoText{
+    width: 0;
+    position: absolute;
+    left: 20px;
+    top: 220px;
+
 }
 
 #hots {
@@ -107,10 +120,19 @@
     width: 75px;
     background-color: green;
     border-radius: 100%;
-    position: relative;
+    position: absolute;
     left: 20px;
-    top: 80px;
-    /* left: 645px;
-    top: 725px; */
+    top: 300px;
     
+    
+
 }
+#hotsText{
+    background-color: silver;
+    width: 170px;
+    position: absolute;
+    left: 20px;
+    top: 360px;
+
+}
+

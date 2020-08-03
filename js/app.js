@@ -169,16 +169,17 @@ const gameLogic = {
 
 const gameAssets = {
     topping: class Topping {
-        constructor(name, isMeat) {
+        constructor(name, isMeat, position) {
             this.name = name;
             this.isMeat = isMeat;
             this.onPlayerPizza = false;
+            this.position = position;
         }
     },
     makeToppingList: ()=>{
-        const onions = new gameAssets.topping('onions', false);
-        const hots = new gameAssets.topping('hot peppers', false);
-        const mushrooms = new gameAssets.topping('mushrooms', false);
+        const onions = new gameAssets.topping('onions', false, 'left: 20px; top: 20px');
+        const tomatoes = new gameAssets.topping('tomatoes', false, 'left: 20px; top: 160px');
+        const hots = new gameAssets.topping('hot peppers', false, 'left: 20px; top: 300px');
         const broccoli = new gameAssets.topping('broccoli', false);
         const pineapple = new gameAssets.topping('pineapples', false);
         const pepperoni = new gameAssets.topping('pepperoni', true);
@@ -187,7 +188,7 @@ const gameAssets = {
         const bacon = new gameAssets.topping('bacon', true);
         const chicken = new gameAssets.topping('chicken', true);
 
-        toppingsList = [onions, hots, mushrooms, broccoli, pineapple, pepperoni, sausage, ham, bacon, chicken]
+        toppingsList = [onions, hots, tomatoes, broccoli, pineapple, pepperoni, sausage, ham, bacon, chicken]
 
         return toppingsList
     },
@@ -222,9 +223,9 @@ const gameAssets = {
 }
 
 const position1 = 'left: 690px; top: 65px';
-const position2 = 'left: 760px; top: 155px';
-const position3 = 'left: 610px; top: 220px';
-const position4 = 'left: 540px; top: 65px';
+const position2 = 'left: 760px; top: 230px';
+const position3 = 'left: 610px; top: 300px';
+const position4 = 'left: 540px; top: 140px';
 
 gameAssets.makeToppingList()
 
