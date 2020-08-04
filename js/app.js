@@ -11,6 +11,17 @@ const gameLogic = {
     tipPlayer: (player, tipMoney)=>{
         player.money += tipMoney;
     },
+    removeAllToppings: (player)=>{
+        // for (let i = 0; i < toppingsList.length; i++) {
+        //     const $toppingsList = $(toppingsList)
+        //     console.log($toppingsList.eq(i))
+            
+        // }
+        const $removedTopping = $('.topping')
+        $removedTopping.removeAttr('style')
+        player.constructedPizza = []
+
+    },
     playerMakesPizza: (customer, player)=>{
         // const $okButton = $("<button class='okButton'>New OK</button>")
         // $okButton.insertBefore($('.playerScores'))
@@ -59,15 +70,10 @@ const gameLogic = {
 
         }
         $topping.on('click', moveToppingToPizza)
-        $remakeButton.on('click', ()=>{
-            for (let i = 0; i < toppingsList.length; i++) {
-                const $toppingsList = $(toppingsList)
-                console.log($toppingsList.eq(i))
-                // gameLogic.playerMakesPizza(customer, player)
-            }
-            player.constructedPizza = []
-        }
-        )
+        $remakeButton.on('click', () => {
+            gameLogic.removeAllToppings(player)
+
+        })
         // while (player.constructedPizza.length < 4) {
         //     if (player.constructedPizza.length === 0) {
         //         window.alert("Let's put on some toppings!")
