@@ -44,11 +44,17 @@ const gameLogic = {
         window.alert('Ok! Time to see how you did!')
     },
     askForPizza: (customer, player)=>{
-        if (day === 0) {
-            console.log(`Hi ${player.name}! My name is ${customer.name}. Can you please make me a pizza with ${customer.favToppings[0].name}, ${customer.favToppings[1].name}, ${customer.favToppings[2].name}, and ${customer.favToppings[3].name}? Thanks!`)
-        } else {
-            console.log(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
-        }
+        // if (day === 0) {
+        //     console.log(`Hi ${player.name}! My name is ${customer.name}. Can you please make me a pizza with ${customer.favToppings[0].name}, ${customer.favToppings[1].name}, ${customer.favToppings[2].name}, and ${customer.favToppings[3].name}? Thanks!`)
+        // } else {
+            const $updatingText = $('#updatingText')
+            $updatingText.text(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
+            const $okButton = $("<button class='okButton'>Ask OK</button>")
+            $okButton.insertBefore($('.playerScores'))
+            $okButton.on('click', ()=>{console.log('onto make pizza')})
+            
+            // console.log(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
+        // }
     },
     comparePizzas: (customer, player) => {
 
@@ -126,27 +132,38 @@ const gameLogic = {
     },
     runNormalDayLoop: () => {
         // console.log('made it to day loop')
-        const $startButton = $('#startButton')
-        $startButton.remove()
+        // const $startButton = $('#startButton')
+        // $startButton.remove()
         const $checkWinButton = $("<button class='okButton'>SEE WINNER</button>")
         const $updatingText = $('#updatingText')
-        $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
+        const $okButton = $("<button class='okButton'>New OK</button>")
         // const $startButton = $('#startButton')
-        const $okButton = $("<button class='okButton'>OK</button>")
-        $okButton.insertBefore($('.playerScores'))
-        $okButton.on('click', () => {
-            if (day < 3) {
-                day++;
-                $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
-                console.log('running day loop', 'Day ', day)
+        if (day < 4) {
+            $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
+            
+            $okButton.insertBefore($('.playerScores'))
+            $okButton.on('click', () => {
+                // const $newOkButton = $("<button class='okButton'>New OK</button>")
+                // $newOkButton.insertBefore($('.playerScores'))
+                console.log('clicking through', day)
+                const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                gameLogic.askForPizza(todaysCustomerP1, player1)
+                // $newOkButton.on('click', ()=>{
+                //     console.log('time to ask for pizza', day)
+                //     day++;
+                //     $newOkButton.remove()
+                day++
+                $okButton.remove()
+                // gameLogic.runNormalDayLoop()  
+            })
+        
+                
+                // console.log('running day loop', 'Day ', day)
                 // $startButton.remove()
                 // $okButton.remove()
                 // gameLogic.runNormalDayLoop()
 
-
-
-                //         // const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
-                //         // const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
                 //         // gameLogic.askForPizza(todaysCustomerP1, player1);
                 //         // gameLogic.playerMakesPizza(player1)
                 //         // gameLogic.comparePizzas(todaysCustomerP1, player1);
@@ -157,13 +174,14 @@ const gameLogic = {
                 //         $okButton.remove()
                 //         gameLogic.runNormalDayLoop()
             } else {
-                $okButton.remove()
+                // $okButton.remove()
                 $checkWinButton.insertBefore($('.playerScores'))
                 $updatingText.text('Let\'s see who won')
             }
+            // $okButton.insertBefore($('.playerScores'))
 
 
-        })
+        
         $checkWinButton.on('click', () => { console.log('made it to final tally') })
 
 
@@ -245,7 +263,7 @@ const gameLogic = {
                                         $startButton.on('click', () => {
                                             console.log('start clicked')
                                             day++;
-                                            // $startButton.remove()
+                                            $startButton.remove()
                                             gameLogic.runNormalDayLoop()
                                             // return;
                                             
