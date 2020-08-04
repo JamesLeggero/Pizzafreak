@@ -299,6 +299,64 @@ console.log('gameLogic.fullGame()')
 console.log('Reload (Command-R) when the game is over to play again')
 
 
+// const testStartGame = (event) => {
+//     console.log('button was clicked', event.currentTarget)
+//     const $player1Name = $(`<h3 class='playerName'>${$player1Input}</h3>`)
+//     $player1Input.remove()
+//     $player1Name.prependTo($('#player1'))
+
+
+// }
+
+const $firstInput = $('.player1Input')
+const $secondInput = $("<input class ='player2Input' type='text' placeholder='Player 2'></input>")
+const $okButton = $("<button class='okButton'>OK</button>")
+const $updatingText = $('#updatingText')
+
+const firstPlayerInput = event => {
+    if(event.key === 'Enter') {
+        if ($firstInput.val() === ''){
+            $firstInput.val('Player 1')
+        }
+            console.log($firstInput.val())
+            const $oldPlayer1Name = $('#oldPlayer1Name')
+            $oldPlayer1Name.remove()
+            const $newPlayer1 = $("<h2 class='playerName'>")
+            $newPlayer1.text($firstInput.val())
+            console.log('New Name:', $newPlayer1)
+            $newPlayer1.prependTo($('#player1'))
+            $firstInput.remove()
+            $secondInput.appendTo($('.dialogue'))
+            $updatingText.text('Excellent! Let\'s put in Player 2\'s name.')
+    }
+}
+
+const secondPlayerInput = event => {
+    if(event.key === 'Enter') {
+        if ($secondInput.val() === ''){
+            $secondInput.val('Player 2')
+        }
+            console.log($secondInput.val())
+            const $oldPlayer2Name = $('#oldPlayer2Name')
+            $oldPlayer2Name.remove()
+            const $newPlayer2 = $("<h2 class='playerName'>")
+            $newPlayer2.text($secondInput.val())
+            console.log('New Name:', $newPlayer2)
+            $newPlayer2.prependTo($('#player2'))
+            $secondInput.remove()
+            $okButton.insertBefore($('.playerScores'))
+            $updatingText.text('The owner of ARETE PIZZA is looking for a new genius cook. Can you serve up perfect pizzas to his starving customers? Let\'s find out!')
+    }
+}
+
+$firstInput.on('keypress', firstPlayerInput)
+$secondInput.on('keypress', secondPlayerInput)
+
+// const $okButton = $('.okButton')
+// const $player1Input = $('#player1Name')
+// $player1Input.keyup('keypress', ()=>{console.log($player1Input.val())})
+// const $player2Input = $('#player2Name')
+// // $okButton.on('click', testStartGame)
 
 
 $( ()=>{
