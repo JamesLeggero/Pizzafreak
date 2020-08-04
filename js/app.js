@@ -128,6 +128,7 @@ const gameLogic = {
         // console.log('made it to day loop')
         const $startButton = $('#startButton')
         $startButton.remove()
+        const $checkWinButton = $("<button class='okButton'>SEE WINNER</button>")
         const $updatingText = $('#updatingText')
         $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
         // const $startButton = $('#startButton')
@@ -156,14 +157,16 @@ const gameLogic = {
                 //         $okButton.remove()
                 //         gameLogic.runNormalDayLoop()
             } else {
+                $okButton.remove()
+                $checkWinButton.insertBefore($('.playerScores'))
+                $updatingText.text('Let\'s see who won')
+            }
 
-            $updatingText.text('Let\'s see who won')
-            $okButton.on('.click', () => { console.log('made it to final tally') })
-        }
-            
-        }
-    )
-            
+
+        })
+        $checkWinButton.on('click', () => { console.log('made it to final tally') })
+
+
     }
 
 
