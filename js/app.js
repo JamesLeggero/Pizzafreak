@@ -124,6 +124,55 @@ const gameLogic = {
         }
         return;
     },
+    runNormalDayLoop: () => {
+        // console.log('made it to day loop')
+        const $startButton = $('#startButton')
+        $startButton.remove()
+        const $updatingText = $('#updatingText')
+        $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
+        // const $startButton = $('#startButton')
+        const $okButton = $("<button class='okButton'>OK</button>")
+        $okButton.insertBefore($('.playerScores'))
+        $okButton.on('click', () => {
+            if (day < 3) {
+                day++;
+                $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
+                console.log('running day loop', 'Day ', day)
+                // $startButton.remove()
+                // $okButton.remove()
+                // gameLogic.runNormalDayLoop()
+
+
+
+                //         // const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                //         // const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                //         // gameLogic.askForPizza(todaysCustomerP1, player1);
+                //         // gameLogic.playerMakesPizza(player1)
+                //         // gameLogic.comparePizzas(todaysCustomerP1, player1);
+                //         // gameLogic.askForPizza(todaysCustomerP2, player2);
+                //         // gameLogic.playerMakesPizza(player2)
+                //         // gameLogic.comparePizzas(todaysCustomerP2, player2);
+                //         // window.alert(`Long night! ${player1.name} has $${player1.money} and ${player2.name} has $${player2.money}.`);
+                //         $okButton.remove()
+                //         gameLogic.runNormalDayLoop()
+            } else {
+
+            $updatingText.text('Let\'s see who won')
+            $okButton.on('.click', () => { console.log('made it to final tally') })
+        }
+            
+        }
+    )
+            
+    }
+
+
+
+
+
+
+
+    ,
     runZeroDayLoop: ()=>{
         
             const $updatingText = $('#updatingText')
@@ -193,12 +242,15 @@ const gameLogic = {
                                         $startButton.on('click', () => {
                                             console.log('start clicked')
                                             day++;
+                                            // $startButton.remove()
+                                            gameLogic.runNormalDayLoop()
+                                            // return;
+                                            
                                         })
 
                                     })
 
                                 })
-                                // gameLogic.runNormalDayLoop()
                             })
                         })
                     })
