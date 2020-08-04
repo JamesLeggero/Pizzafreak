@@ -124,43 +124,184 @@ const gameLogic = {
         }
         return;
     },
-    runDayLoop: ()=>{
-        if (day === 0) {
-            for (let i = 0; i < 3; i++) {
-                gameLogic.askForPizza(fullCustomerList[i], player1)
-            }
-            for (let i = 3; i < 6; i++) {
-                gameLogic.askForPizza(fullCustomerList[i], player2)
-            }
-            day++;
-        } else {
-            window.alert(`It's Day ${day}. Let's make some freakin' pizza!!`)
-            const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
-            const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
-            gameLogic.askForPizza(todaysCustomerP1, player1);
-            gameLogic.playerMakesPizza(player1)
-            gameLogic.comparePizzas(todaysCustomerP1, player1);
-            gameLogic.askForPizza(todaysCustomerP2, player2);
-            gameLogic.playerMakesPizza(player2)
-            gameLogic.comparePizzas(todaysCustomerP2, player2);
-            window.alert(`Long night! ${player1.name} has $${player1.money} and ${player2.name} has $${player2.money}.`);
-            day++;
-        }
+    runZeroDayLoop: ()=>{
+        
+            const $updatingText = $('#updatingText')
+            $updatingText.text("\"These are some of my customer's favorite orders. Learn 'em... or you're outta here!\"")
+            const $okButton = $('.okButton')
+            //COMMENT - Yes, I know this is a terrible way to do this. For time's sake, this seems to work and I'll do a refac later.
+            $okButton.on('click', () => {
+                $updatingText.text(`
+                    ${fullCustomerList[0].name.toUpperCase()}: 
+                        ${fullCustomerList[0].favToppings[0].name}, 
+                        ${fullCustomerList[0].favToppings[1].name}, 
+                        ${fullCustomerList[0].favToppings[2].name}, and
+                        ${fullCustomerList[0].favToppings[3].name}`)
+                $okButton.remove()
+                $okButton.insertBefore($('.playerScores'))
+                $okButton.on('click', () => {
+                    $updatingText.text(`
+                        ${fullCustomerList[1].name.toUpperCase()}: 
+                            ${fullCustomerList[1].favToppings[0].name}, 
+                            ${fullCustomerList[1].favToppings[1].name}, 
+                            ${fullCustomerList[1].favToppings[2].name}, and
+                            ${fullCustomerList[1].favToppings[3].name}`)
+                    $okButton.remove()
+                    $okButton.insertBefore($('.playerScores'))
+                    $okButton.on('click', () => {
+                        $updatingText.text(`
+                            ${fullCustomerList[2].name.toUpperCase()}: 
+                                ${fullCustomerList[2].favToppings[0].name}, 
+                                ${fullCustomerList[2].favToppings[1].name}, 
+                                ${fullCustomerList[2].favToppings[2].name}, and
+                                ${fullCustomerList[2].favToppings[3].name}`)
+                        $okButton.remove()
+                        $okButton.insertBefore($('.playerScores'))
+                        $okButton.on('click', () => {
+                            $updatingText.text(`
+                                ${fullCustomerList[3].name.toUpperCase()}: 
+                                    ${fullCustomerList[3].favToppings[0].name}, 
+                                    ${fullCustomerList[3].favToppings[1].name}, 
+                                    ${fullCustomerList[3].favToppings[2].name}, and
+                                    ${fullCustomerList[3].favToppings[3].name}`)
+                            $okButton.remove()
+                            $okButton.insertBefore($('.playerScores'))
+                            $okButton.on('click', () => {
+                                $updatingText.text(`
+                                    ${fullCustomerList[4].name.toUpperCase()}: 
+                                        ${fullCustomerList[4].favToppings[0].name}, 
+                                        ${fullCustomerList[4].favToppings[1].name}, 
+                                        ${fullCustomerList[4].favToppings[2].name}, and
+                                        ${fullCustomerList[4].favToppings[3].name}`)
+                                $okButton.remove()
+                                $okButton.insertBefore($('.playerScores'))
+                                $okButton.on('click', () => {
+                                    $updatingText.text(`
+                                        ${fullCustomerList[5].name.toUpperCase()}: 
+                                            ${fullCustomerList[5].favToppings[0].name}, 
+                                            ${fullCustomerList[5].favToppings[1].name}, 
+                                            ${fullCustomerList[5].favToppings[2].name}, and
+                                            ${fullCustomerList[5].favToppings[3].name}`)
+                                    $okButton.remove()
+                                    $okButton.insertBefore($('.playerScores'))
+
+                                    $okButton.on('click', () => {
+                                        $updatingText.text("\"Alright, now get to studyin\'! You both start tomorrow!\"")
+                                        $okButton.remove()
+                                        const $startButton = $("<button class='okButton'id='startButton'>START</button>")
+                                        $startButton.insertBefore($('.playerScores'))
+                                        $startButton.on('click', () => {
+                                            console.log('start clicked')
+                                            day++;
+                                        })
+
+                                    })
+
+                                })
+                                // gameLogic.runNormalDayLoop()
+                            })
+                        })
+                    })
+                })
+            })
+            
+            console.log('got to here')
+
+        //     $okButton.on('click', () => {
+        //         $updatingText.text(`
+        //             ${fullCustomerList[1].name.toUpperCase()}: 
+        //                 ${fullCustomerList[1].favToppings[0].name}, 
+        //                 ${fullCustomerList[1].favToppings[1].name}, 
+        //                 ${fullCustomerList[1].favToppings[2].name}, and
+        //                 ${fullCustomerList[1].favToppings[3].name}`)
+        //     })
+        //     $okButton.remove()
+        //     $okButton.insertBefore($('.playerScores'))
+        
+        
+        
+            
+
+
+        //     for (let i = 0; i < 3; i++) {
+
+        //         gameLogic.askForPizza(fullCustomerList[i], player1)
+        //     }
+        //     for (let i = 3; i < 6; i++) {
+        //         gameLogic.askForPizza(fullCustomerList[i], player2)
+        //     }
+            // day++;
+        // } else {
+        //     window.alert(`It's Day ${day}. Let's make some freakin' pizza!!`)
+        //     const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+        //     const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+        //     gameLogic.askForPizza(todaysCustomerP1, player1);
+        //     gameLogic.playerMakesPizza(player1)
+        //     gameLogic.comparePizzas(todaysCustomerP1, player1);
+        //     gameLogic.askForPizza(todaysCustomerP2, player2);
+        //     gameLogic.playerMakesPizza(player2)
+        //     gameLogic.comparePizzas(todaysCustomerP2, player2);
+        //     window.alert(`Long night! ${player1.name} has $${player1.money} and ${player2.name} has $${player2.money}.`);
+        //     day++;
+        // }
     },
-    fullGame: ()=>{
-        let input = window.prompt('Welcome to Pizzafreak! How many days do you want to compete?', '3')
-        const p1Name = window.prompt('Please type Player 1\'s name', 'Player 1');
-        const p2Name = window.prompt('Please type Player 2\'s name', 'Player 2')
-        player1.name = p1Name;
-        player2.name = p2Name;
-        input++;
-        while (day < input) {
-            gameLogic.runDayLoop()
-            if (gameLogic.checkAutoLoss() === 1) {
-                return;
-            };
+    fullGame: () => {
+        // let input = window.prompt('Welcome to Pizzafreak! How many days do you want to compete?', '3')
+        // const p1Name = window.prompt('Please type Player 1\'s name', 'Player 1');
+        // const p2Name = window.prompt('Please type Player 2\'s name', 'Player 2')
+        // player1.name = p1Name;
+        // player2.name = p2Name;
+        // input++;
+        const $firstInput = $('.player1Input')
+        const $secondInput = $("<input class ='player2Input' type='text' placeholder='Player 2'></input>")
+        const $okButton = $("<button class='okButton'>OK</button>")
+        const $updatingText = $('#updatingText')
+
+        const firstPlayerInput = event => {
+            if (event.key === 'Enter') {
+                if ($firstInput.val() === '') {
+                    $firstInput.val('Player 1')
+                }
+                // console.log($firstInput.val())
+                const $oldPlayer1Name = $('#oldPlayer1Name')
+                $oldPlayer1Name.remove()
+                const $newPlayer1 = $("<h2 class='playerName'>")
+                $newPlayer1.text($firstInput.val())
+                // console.log('New Name:', $newPlayer1)
+                $newPlayer1.prependTo($('#player1'))
+                $firstInput.remove()
+                $secondInput.appendTo($('.dialogue'))
+                $updatingText.text('Excellent! Let\'s put in Player 2\'s name.')
+            }
         }
-        gameLogic.checkWinner()
+
+        const secondPlayerInput = event => {
+            if (event.key === 'Enter') {
+                if ($secondInput.val() === '') {
+                    $secondInput.val('Player 2')
+                }
+                // console.log($secondInput.val())
+                const $oldPlayer2Name = $('#oldPlayer2Name')
+                $oldPlayer2Name.remove()
+                const $newPlayer2 = $("<h2 class='playerName'>")
+                $newPlayer2.text($secondInput.val())
+                // console.log('New Name:', $newPlayer2)
+                $newPlayer2.prependTo($('#player2'))
+                $secondInput.remove()
+                $okButton.insertBefore($('.playerScores'))
+                $updatingText.text('The owner of ARETE PIZZA is looking for a new genius cook. Can you serve up perfect pizzas to his starving customers? Let\'s find out!')
+            }
+        }
+
+        $firstInput.on('keypress', firstPlayerInput)
+        $secondInput.on('keypress', secondPlayerInput)
+        $okButton.on('click', gameLogic.runZeroDayLoop)
+        // while (day < 4) {
+        //     if (gameLogic.checkAutoLoss() === 1) {
+        //         return;
+        //     };
+        // }
+        // gameLogic.checkWinner()
     }
     
 
@@ -294,9 +435,9 @@ const player2 = new gameAssets.player('Player 2')
 
 // gameLogic.fullGame();
 
-console.log('Please type the following to play:')
-console.log('gameLogic.fullGame()')
-console.log('Reload (Command-R) when the game is over to play again')
+// console.log('Please type the following to play:')
+// console.log('gameLogic.fullGame()')
+// console.log('Reload (Command-R) when the game is over to play again')
 
 
 // const testStartGame = (event) => {
@@ -308,56 +449,14 @@ console.log('Reload (Command-R) when the game is over to play again')
 
 // }
 
-const $firstInput = $('.player1Input')
-const $secondInput = $("<input class ='player2Input' type='text' placeholder='Player 2'></input>")
-const $okButton = $("<button class='okButton'>OK</button>")
-const $updatingText = $('#updatingText')
 
-const firstPlayerInput = event => {
-    if(event.key === 'Enter') {
-        if ($firstInput.val() === ''){
-            $firstInput.val('Player 1')
-        }
-            console.log($firstInput.val())
-            const $oldPlayer1Name = $('#oldPlayer1Name')
-            $oldPlayer1Name.remove()
-            const $newPlayer1 = $("<h2 class='playerName'>")
-            $newPlayer1.text($firstInput.val())
-            console.log('New Name:', $newPlayer1)
-            $newPlayer1.prependTo($('#player1'))
-            $firstInput.remove()
-            $secondInput.appendTo($('.dialogue'))
-            $updatingText.text('Excellent! Let\'s put in Player 2\'s name.')
-    }
-}
-
-const secondPlayerInput = event => {
-    if(event.key === 'Enter') {
-        if ($secondInput.val() === ''){
-            $secondInput.val('Player 2')
-        }
-            console.log($secondInput.val())
-            const $oldPlayer2Name = $('#oldPlayer2Name')
-            $oldPlayer2Name.remove()
-            const $newPlayer2 = $("<h2 class='playerName'>")
-            $newPlayer2.text($secondInput.val())
-            console.log('New Name:', $newPlayer2)
-            $newPlayer2.prependTo($('#player2'))
-            $secondInput.remove()
-            $okButton.insertBefore($('.playerScores'))
-            $updatingText.text('The owner of ARETE PIZZA is looking for a new genius cook. Can you serve up perfect pizzas to his starving customers? Let\'s find out!')
-    }
-}
-
-$firstInput.on('keypress', firstPlayerInput)
-$secondInput.on('keypress', secondPlayerInput)
 
 // const $okButton = $('.okButton')
 // const $player1Input = $('#player1Name')
 // $player1Input.keyup('keypress', ()=>{console.log($player1Input.val())})
 // const $player2Input = $('#player2Name')
 // // $okButton.on('click', testStartGame)
-
+gameLogic.fullGame()
 
 $( ()=>{
     
