@@ -11,50 +11,108 @@ const gameLogic = {
     tipPlayer: (player, tipMoney)=>{
         player.money += tipMoney;
     },
-    playerMakesPizza: (player)=>{
+    playerMakesPizza: (customer, player)=>{
+        // const $okButton = $("<button class='okButton'>New OK</button>")
+        // $okButton.insertBefore($('.playerScores'))
+        const $updatingText = $('#updatingText')
+        $updatingText.text(`${player.name} is making a pizza for ${customer.name}`)
         player.constructedPizza = []
-        // gameAssets.makeToppingList()
+        console.log('made it to playerMakesPizza 1)')
+        gameAssets.makeToppingList()
         for (let i = 0; i < toppingsList.length; i++) {
             toppingsList[i].onPlayerPizza = false;
         }
-        while (player.constructedPizza.length < 4) {
+        const $remakeButton = $("<button id='remakePizza'>Remake Pizza</button>")
+        $remakeButton.appendTo($('.toppingPan'))
+        const $confirmButton = $("<button id='confirmPizza'>Confirm Pizza</button>")
+        $confirmButton.appendTo($('.toppingPan'))
+        const $topping = $('.topping')
+
+
+
+
+        const position0 = 'left: 690px; top: 65px;';
+        const position1 = 'left: 760px; top: 230px';
+        const position2 = 'left: 610px; top: 300px';
+        const position3 = 'left: 540px; top: 140px';
+
+
+        const moveToppingToPizza = (event) => {
+            const toppingObject = toppingsList[$topping.index(event.currentTarget)]
+            console.log(toppingObject.name)
+            console.log('clicked', event.currentTarget)
+
             if (player.constructedPizza.length === 0) {
-                window.alert("Let's put on some toppings!")
-            }
-            let randomTopping = gameLogic.randGen(toppingsList.length);
-            randomTopping++;
-            let input = window.prompt(`What would you like to put on the pizza? Type: 1 for ${toppingsList[0].name}, 2 for ${toppingsList[1].name}, 3 for ${toppingsList[2].name}, 4 for ${toppingsList[3].name}, 5 for ${toppingsList[4].name}, 6 for ${toppingsList[5].name}, 7 for ${toppingsList[6].name}, 8 for ${toppingsList[7].name}, 9 for ${toppingsList[8].name}, or 10 for ${toppingsList[9].name}.`, randomTopping)
-            input--;
-            if (toppingsList[input].onPlayerPizza === true) {
-                window.alert(`Whoops, there's already ${toppingsList[input].name} on your pizza.`)
-            } else {
-                toppingsList[input].onPlayerPizza = true;
-                player.constructedPizza.push(toppingsList[input])
-            }
-            if (player.constructedPizza.length === 1) {
-                window.alert(`Your pizza currently has ${player.constructedPizza[0].name} on it.`)
+                $(event.currentTarget).attr('style', position0)
+                player.constructedPizza.push(toppingObject.name)
+            } else if (player.constructedPizza.length === 1) {
+                $(event.currentTarget).attr('style', position1)
+                player.constructedPizza.push(toppingObject.name)
             } else if (player.constructedPizza.length === 2) {
-                window.alert(`Your pizza currently has ${player.constructedPizza[0].name} and ${player.constructedPizza[1].name} on it.`)
+                $(event.currentTarget).attr('style', position2)
+                player.constructedPizza.push(toppingObject.name)
             } else if (player.constructedPizza.length === 3) {
-                window.alert(`Your pizza currently has ${player.constructedPizza[0].name}, ${player.constructedPizza[1].name}, and ${player.constructedPizza[2].name} on it.`)
-            } else {
-                window.alert(`Your pizza currently has ${player.constructedPizza[0].name}, ${player.constructedPizza[1].name}, ${player.constructedPizza[2].name},and ${player.constructedPizza[3].name} on it.`)
+                $(event.currentTarget).attr('style', position3)
+                player.constructedPizza.push(toppingObject.name)
             }
+            console.log(player.constructedPizza)
+
         }
-        window.alert('Ok! Time to see how you did!')
+        $topping.on('click', moveToppingToPizza)
+        $remakeButton.on('click', ()=>{
+            for (let i = 0; i < toppingsList.length; i++) {
+                const $toppingsList = $(toppingsList)
+                console.log($toppingsList.eq(i))
+                // gameLogic.playerMakesPizza(customer, player)
+            }
+            player.constructedPizza = []
+        }
+        )
+        // while (player.constructedPizza.length < 4) {
+        //     if (player.constructedPizza.length === 0) {
+        //         window.alert("Let's put on some toppings!")
+        //     }
+        //     let randomTopping = gameLogic.randGen(toppingsList.length);
+        //     randomTopping++;
+        //     let input = window.prompt(`What would you like to put on the pizza? Type: 1 for ${toppingsList[0].name}, 2 for ${toppingsList[1].name}, 3 for ${toppingsList[2].name}, 4 for ${toppingsList[3].name}, 5 for ${toppingsList[4].name}, 6 for ${toppingsList[5].name}, 7 for ${toppingsList[6].name}, 8 for ${toppingsList[7].name}, 9 for ${toppingsList[8].name}, or 10 for ${toppingsList[9].name}.`, randomTopping)
+        //     input--;
+        //     if (toppingsList[input].onPlayerPizza === true) {
+        //         window.alert(`Whoops, there's already ${toppingsList[input].name} on your pizza.`)
+        //     } else {
+        //         toppingsList[input].onPlayerPizza = true;
+        //         player.constructedPizza.push(toppingsList[input])
+        //     }
+        //     if (player.constructedPizza.length === 1) {
+        //         window.alert(`Your pizza currently has ${player.constructedPizza[0].name} on it.`)
+        //     } else if (player.constructedPizza.length === 2) {
+        //         window.alert(`Your pizza currently has ${player.constructedPizza[0].name} and ${player.constructedPizza[1].name} on it.`)
+        //     } else if (player.constructedPizza.length === 3) {
+        //         window.alert(`Your pizza currently has ${player.constructedPizza[0].name}, ${player.constructedPizza[1].name}, and ${player.constructedPizza[2].name} on it.`)
+        //     } else {
+        //         window.alert(`Your pizza currently has ${player.constructedPizza[0].name}, ${player.constructedPizza[1].name}, ${player.constructedPizza[2].name},and ${player.constructedPizza[3].name} on it.`)
+        //     }
+        // }
+        // window.alert('Ok! Time to see how you did!')
     },
     askForPizza: (customer, player)=>{
         // if (day === 0) {
         //     console.log(`Hi ${player.name}! My name is ${customer.name}. Can you please make me a pizza with ${customer.favToppings[0].name}, ${customer.favToppings[1].name}, ${customer.favToppings[2].name}, and ${customer.favToppings[3].name}? Thanks!`)
         // } else {
             const $updatingText = $('#updatingText')
+            const $oldOkButton = $('.okButton')
+            $oldOkButton.remove()
             $updatingText.text(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
-            const $okButton = $("<button class='okButton'>Ask OK</button>")
-            $okButton.insertBefore($('.playerScores'))
-            $okButton.on('click', ()=>{console.log('onto make pizza')})
+            const $newOkButton = $("<button class='okButton'>Ask OK</button>")
+            $newOkButton.insertBefore($('.playerScores'))
+            $newOkButton.on('click', ()=>{
+                $newOkButton.remove()
+                $updatingText.text('')
+                gameLogic.playerMakesPizza(customer, player)
+    
+                
+            })
             
-            // console.log(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
-        // }
+           
     },
     comparePizzas: (customer, player) => {
 
@@ -148,13 +206,17 @@ const gameLogic = {
                 console.log('clicking through', day)
                 const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
                 const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                console.log('paper')
                 gameLogic.askForPizza(todaysCustomerP1, player1)
+                console.log('plastic')
+                // gameLogic.playerMakesPizza(todaysCustomerP1, player1)
+                // console.log('cloth')
                 // $newOkButton.on('click', ()=>{
                 //     console.log('time to ask for pizza', day)
                 //     day++;
                 //     $newOkButton.remove()
                 day++
-                $okButton.remove()
+                // $okButton.remove()
                 // gameLogic.runNormalDayLoop()  
             })
         
@@ -343,6 +405,7 @@ const gameLogic = {
                 // console.log('New Name:', $newPlayer1)
                 $newPlayer1.prependTo($('#player1'))
                 $firstInput.remove()
+                player1.name = $firstInput.val()
                 $secondInput.appendTo($('.dialogue'))
                 $updatingText.text('Excellent! Let\'s put in Player 2\'s name.')
             }
@@ -361,6 +424,7 @@ const gameLogic = {
                 // console.log('New Name:', $newPlayer2)
                 $newPlayer2.prependTo($('#player2'))
                 $secondInput.remove()
+                player2.name = $secondInput.val()
                 $okButton.insertBefore($('.playerScores'))
                 $updatingText.text('The owner of ARETE PIZZA is looking for a new genius cook. Can you serve up perfect pizzas to his starving customers? Let\'s find out!')
             }
@@ -383,7 +447,7 @@ const gameLogic = {
 
 const gameAssets = {
     topping: class Topping {
-        constructor(name, isMeat, position = '0 0') {
+        constructor(name, isMeat, position) {
             this.name = name;
             this.isMeat = isMeat;
             this.onPlayerPizza = false;
@@ -396,11 +460,11 @@ const gameAssets = {
         const hots = new gameAssets.topping('hot peppers', false, 'left: 20px; top: 300px');
         const broccoli = new gameAssets.topping('broccoli', false, 'left: 120px; top: 80px;');
         const pineapple = new gameAssets.topping('pineapples', false, 'left: 120px; top: 270px;');
-        const pepperoni = new gameAssets.topping('pepperoni', true);
-        const sausage = new gameAssets.topping('sausage', true);
-        const ham = new gameAssets.topping('ham', true);
-        const bacon = new gameAssets.topping('bacon', true);
-        const chicken = new gameAssets.topping('chicken', true);
+        const pepperoni = new gameAssets.topping('pepperoni', true, 'right: 120px; top: 20px;');
+        const sausage = new gameAssets.topping('sausage', true, 'right: 120px; top: 160px;');
+        const ham = new gameAssets.topping('ham', true, 'right: 127.5px; top: 300px;');
+        const bacon = new gameAssets.topping('bacon', true, 'right: 23px; top: 80px;');
+        const chicken = new gameAssets.topping('chicken', true, 'right: 20px; top: 270px;');
 
         toppingsList = [onions, tomatoes, hots, broccoli, pineapple, pepperoni, sausage, ham, bacon, chicken]
 
@@ -452,34 +516,7 @@ const gameAssets = {
 // }
 gameAssets.makeToppingList()
 
-const position0 = 'left: 690px; top: 65px;'; 
-const position1 = 'left: 760px; top: 230px';
-const position2 = 'left: 610px; top: 300px';
-const position3 = 'left: 540px; top: 140px';
 
-const $topping = $('.topping')
-const moveToppingToPizza = (event)=>{
-    const toppingObject = toppingsList[$topping.index(event.currentTarget)]
-    console.log(toppingObject.name)
-    console.log('clicked', event.currentTarget)
-    
-    if (player1.constructedPizza.length === 0) {
-        $(event.currentTarget).attr('style', position0)
-        player1.constructedPizza.push(toppingObject.name)
-    } else if (player1.constructedPizza.length === 1) {
-        $(event.currentTarget).attr('style', position1)
-        player1.constructedPizza.push(toppingObject.name)
-    } else if (player1.constructedPizza.length === 2) {
-        $(event.currentTarget).attr('style', position2)
-        player1.constructedPizza.push(toppingObject.name)
-    } else if (player1.constructedPizza.length === 3) {
-        $(event.currentTarget).attr('style', position3)
-        player1.constructedPizza.push(toppingObject.name)
-    }
-    console.log(player1.constructedPizza)
-    
-}
-$topping.on('click', moveToppingToPizza)
 
 
 
