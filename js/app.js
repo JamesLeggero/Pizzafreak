@@ -12,11 +12,6 @@ const gameLogic = {
         player.money += tipMoney;
     },
     removeAllToppings: (player)=>{
-        // for (let i = 0; i < toppingsList.length; i++) {
-        //     const $toppingsList = $(toppingsList)
-        //     console.log($toppingsList.eq(i))
-            
-        // }
         const $removedTopping = $('.topping')
         $removedTopping.removeAttr('style')
         player.constructedPizza = []
@@ -72,6 +67,20 @@ const gameLogic = {
         $topping.on('click', moveToppingToPizza)
         $remakeButton.on('click', () => {
             gameLogic.removeAllToppings(player)
+
+        })
+        $confirmButton.on('click', ()=>{
+            if (player.constructedPizza.length < 4){
+                $updatingText.text('You must put 4 toppings on!')
+                // window.setTimeout($updatingText.text(`${player.name} is making a pizza for ${customer.name}`), 2000)
+                setTimeout(()=>{$updatingText.text(`${player.name} is making a pizza for ${customer.name}`)}, 3000)
+                console.log('not enough')
+                
+            } else {
+                console.log ('time to compare!')
+            }
+
+
 
         })
         // while (player.constructedPizza.length < 4) {
