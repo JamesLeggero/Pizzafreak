@@ -136,6 +136,12 @@ const gameLogic = {
     comparePizzas: (customer, player) => {
 
         //making and sorting two lists based on the names of the customer toppings and player toppings
+        const $returnOff = $('body')
+        $returnOff.on('keypress', (event)=>{
+            if (event.key === "Enter") {
+                return false
+            }
+        })
         const customerToppingObjArr = Array.from(Object.values(customer.favToppings))
         const customerToppingList = [];
         for (let i = 0; i < 4; i++) {
@@ -370,7 +376,7 @@ const gameLogic = {
 
     ,
     runZeroDayLoop: ()=>{
-        
+            
             const $updatingText = $('#updatingText')
             $updatingText.text("\"These are some of my customer's favorite orders. Learn 'em... or you're outta here!\"")
             const $okButton = $('.okButton')
@@ -519,6 +525,7 @@ const gameLogic = {
                 $newPlayer1.prependTo($('#player1'))
                 $firstInput.remove()
                 player1.name = $firstInput.val()
+                // $firstInput.off('keypress', firstPlayerInput)
                 // $secondInput.appendTo($('.dialogue'))
                 // $updatingText.text('Excellent! Let\'s put in Player 2\'s name.')
                 $okButton.insertBefore($('.playerScores'))
@@ -540,6 +547,7 @@ const gameLogic = {
                 $newPlayer2.prependTo($('#player2'))
                 $secondInput.remove()
                 player2.name = $secondInput.val()
+                // $secondInput.off('keypress', secondPlayerInput)
                 $okButton.insertBefore($('.playerScores'))
                 $updatingText.text('The owner of ARETE PIZZA is looking for a new genius cook. Can you serve up perfect pizzas to his starving customers? Let\'s find out!')
             }
