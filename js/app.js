@@ -1,6 +1,6 @@
 // console.log($)
 
-
+$( ()=>{
 
 const gameLogic = {
     randGen: (num)=>{
@@ -41,16 +41,16 @@ const gameLogic = {
             
             if (player.constructedPizza.length === 0) {
                 $(event.currentTarget).attr('style', position0)
-                player.constructedPizza.push(toppingObject.name)
+                player.constructedPizza.push(toppingObject)
             } else if (player.constructedPizza.length === 1) {
                 $(event.currentTarget).attr('style', position1)
-                player.constructedPizza.push(toppingObject.name)
+                player.constructedPizza.push(toppingObject)
             } else if (player.constructedPizza.length === 2) {
                 $(event.currentTarget).attr('style', position2)
-                player.constructedPizza.push(toppingObject.name)
+                player.constructedPizza.push(toppingObject)
             } else if (player.constructedPizza.length === 3) {
                 $(event.currentTarget).attr('style', position3)
-                player.constructedPizza.push(toppingObject.name)
+                player.constructedPizza.push(toppingObject)
             }
         }
         $topping.on('click', moveToppingToPizza)
@@ -109,7 +109,12 @@ const gameLogic = {
         
 
         
-        const playerConstructedList = player.constructedPizza
+        const playerConstructedList = []
+        for (let i = 0; i < player.constructedPizza.length; i++) {
+            playerConstructedList.push(player.constructedPizza[i].name)
+        }
+        // console.log(playerConstructedList)
+        
        
     
         // console.log(customerToppingList, playerConstructedList)
@@ -125,6 +130,18 @@ const gameLogic = {
         $okButton.insertBefore($('.playerScores'))
         $okButton.on('click', ()=>{
             $okButton.remove()
+            const sadVegetarian = ()=>{
+                for (let i = 0; i < player1.constructedPizza.length; i++) {
+                    if (player1.constructedPizza[i].isMeat) {
+                        return true
+                    }
+                    // return false
+                }
+            }
+            if (sadVegetarian() === true && customer.isVegetarian === true) {
+                // console.log('uh oh! you put on meat!')
+                player.autoLoss = true
+            }
             
             if ($whatCustomerWanted.length > 2) {
                 $updatingText.text(`${customer.name.toUpperCase()}: \"You really screwed up my order. I want a refund!\"`)
@@ -176,9 +193,7 @@ const gameLogic = {
                     })
               
             }
-            if (player.money < 0) {
-                player.autoLoss = true
-            }
+            
             
            
             
@@ -188,6 +203,20 @@ const gameLogic = {
             $p1Money.text(`$${player1.money}`)
             
         
+    },
+
+    checkAutoLoss: ()=>{
+        const $updatingText = $('#updatingText')
+        const $checkLoseButton = $('.okButton')
+        const $playAgainBtn = $("<button class='okButton'>PLAY AGAIN</button>")
+        $checkLoseButton.remove()
+        $updatingText.text(`${player1.name.toUpperCase()}!!! I just got a call that you put meat on a vegetarian\'s pizza yesterday. This is unacceptable! GET OUT!!!`)
+        $playAgainBtn.insertBefore($('.playerScores'))
+        $playAgainBtn.on('click', ()=>{
+            window.location.reload();
+        })
+        return
+
     },
     // checkAutoLoss: ()=>{
     //     if (player1.money < 0 && player2.money < 0){
@@ -212,6 +241,10 @@ const gameLogic = {
         const $checkWinButton = $('.okButton')
         const $playAgainBtn = $("<button class='okButton'>PLAY AGAIN</button>")
         $checkWinButton.remove()
+        if (player1.autoLoss) {
+            gameLogic.checkAutoLoss()
+            return
+        }
         if (player1.money > 24) {
             $updatingText.text('\"You\'re a serious pizzafreak. Welcome aboard!\"')
         } else if (player1.money > 14) {
@@ -235,16 +268,23 @@ const gameLogic = {
         const $checkWinButton = $("<button class='okButton'>FINAL RESULT</button>")
         const $updatingText = $('#updatingText')
         const $okButton = $("<button class='okButton'>OK</button>")
-        
+
+       
         if (day < 4) {
             $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
             
             $okButton.insertBefore($('.playerScores'))
             $okButton.on('click', () => {
-                const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                if (player1.autoLoss) {
+                    gameLogic.checkAutoLoss()
+                    return
+                }
+                // const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                const todaysCustomerP1 = michelle
                 gameLogic.askForPizza(todaysCustomerP1, player1)
             })
             } else {
+                
                 $checkWinButton.insertBefore($('.playerScores'))
                 $updatingText.text('Let\'s see how you did!')
             }
@@ -455,5 +495,5 @@ const player1 = new gameAssets.player('Player 1')
 
 gameLogic.startGame()
 
-$( ()=>{
+
 });
