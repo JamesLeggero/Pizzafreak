@@ -75,7 +75,7 @@ const gameLogic = {
                 $updatingText.text('You must put 4 toppings on!')
                 // window.setTimeout($updatingText.text(`${player.name} is making a pizza for ${customer.name}`), 2000)
                 setTimeout(()=>{$updatingText.text(`${player.name} is making a pizza for ${customer.name}`)}, 3000)
-                console.log('not enough')
+                // console.log('not enough')
                 
             } else {
             
@@ -165,13 +165,18 @@ const gameLogic = {
         $okButton.insertBefore($('.playerScores'))
         $okButton.on('click', ()=>{
             $okButton.remove()
-            gameLogic.removeAllToppings(player)
+            
             if ($whatCustomerWanted.length > 2) {
                 $updatingText.text(`${customer.name.toUpperCase()}: \"You really screwed up my order. I want a refund!\"`)
                 gameLogic.tipPlayer(player, -15)
-                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                const $okButton = $("<button class='okButton'>Back to Loop A</button>")
                 $okButton.insertBefore($('.playerScores'))
-                $okButton.on('click', gameLogic.runNormalDayLoop)
+                $okButton.on('click', ()=>{
+                    gameLogic.removeAllToppings(player)
+                    day++
+                    $okButton.remove()
+                    gameLogic.runNormalDayLoop()
+                    })
                 // const $p1Money = $('.p1Money')
                 // $p1Money.text(`$${player1.money}`)
                 // const $p2Money = $('.p2Money')
@@ -179,9 +184,14 @@ const gameLogic = {
             } else if ($whatCustomerWanted.length === 2) {
                 // console.log(`You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead.`)
                 $updatingText.text(`${customer.name.toUpperCase()}: \"You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead."`)
-                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                const $okButton = $("<button class='okButton'>Back to Loop B</button>")
                 $okButton.insertBefore($('.playerScores'))
-                $okButton.on('click', gameLogic.runNormalDayLoop)
+                $okButton.on('click', ()=>{
+                    gameLogic.removeAllToppings(player)
+                    day++
+                    $okButton.remove()
+                    gameLogic.runNormalDayLoop()
+                    })
                 // const $p1Money = $('.p1Money')
                 // $p1Money.text(`$${player1.money}`)
                 // const $p2Money = $('.p2Money')
@@ -191,9 +201,14 @@ const gameLogic = {
                 $updatingText.text(`${customer.name.toUpperCase()}: \"It's not perfect, but you did ok. I wanted ${$whatCustomerWanted[0]}, but you gave me ${$whatPlayerMade[0]} instead.\"`)
                 
                 gameLogic.tipPlayer(player, 2)
-                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                const $okButton = $("<button class='okButton'>Back to Loop C</button>")
                 $okButton.insertBefore($('.playerScores'))
-                $okButton.on('click', gameLogic.runNormalDayLoop)
+                $okButton.on('click', ()=>{
+                    gameLogic.removeAllToppings(player)
+                    day++
+                    $okButton.remove()
+                    gameLogic.runNormalDayLoop()
+                    })
                 // const $p1Money = $('.p1Money')
                 // $p1Money.text(`$${player1.money}`)
                 // const $p2Money = $('.p2Money')
@@ -201,9 +216,14 @@ const gameLogic = {
             } else if ($whatCustomerWanted.length === 0){
                 $updatingText.text(`${customer.name.toUpperCase()}: \"Nice job... the perfect pizza!\"`)
                 gameLogic.tipPlayer(player, 5)
-                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                const $okButton = $("<button class='okButton'>Back to Loop D</button>")
                 $okButton.insertBefore($('.playerScores'))
-                $okButton.on('click', gameLogic.runNormalDayLoop)
+                $okButton.on('click', ()=>{
+                    gameLogic.removeAllToppings(player)
+                    day++
+                    $okButton.remove()
+                    gameLogic.runNormalDayLoop()
+                    })
                 // const $p1Money = $('.p1Money')
                 // $p1Money.text(`$${player1.money}`)
                 // const $p2Money = $('.p2Money')
@@ -213,7 +233,10 @@ const gameLogic = {
                 player.autoLoss = true
             }
             
+           
+            
             // return
+            // gameLogic.runNormalDayLoop()
         })
         const $p1Money = $('.p1Money')
             $p1Money.text(`$${player1.money}`)
@@ -282,9 +305,9 @@ const gameLogic = {
                 //     console.log('time to ask for pizza', day)
                 //     day++;
                 //     $newOkButton.remove()
-                day++
-                $okButton.remove()
+                // $okButton.remove()
                 // gameLogic.runNormalDayLoop()  
+                
             })
         
                 
