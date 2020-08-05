@@ -1,6 +1,6 @@
 // console.log($)
 
-
+$( ()=>{
 const gameLogic = {
     randGen: (num)=>{
         return Math.floor(Math.random() * num)
@@ -298,8 +298,10 @@ const gameLogic = {
         // $startButton.remove()
         // gameLogic.removeAllToppings(player1)
         // gameLogic.removeAllToppings(player2)
+        const $updateMoney = $('span')
+        $updateMoney.text(`$${player1.money}`)
         day++
-        const $checkWinButton = $("<button class='okButton'>SEE WINNER</button>")
+        const $checkWinButton = $("<button class='okButton'>FINAL RESULT</button>")
         const $updatingText = $('#updatingText')
         const $okButton = $("<button class='okButton'>New OK</button>")
         // const $startButton = $('#startButton')
@@ -681,7 +683,7 @@ const player2 = new gameAssets.player('Player 2')
 // // $okButton.on('click', testStartGame)
 gameLogic.fullGame()
 
-$( ()=>{
+
     
     
 });
