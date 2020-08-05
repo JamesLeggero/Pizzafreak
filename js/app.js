@@ -69,6 +69,7 @@ const gameLogic = {
             gameLogic.removeAllToppings(player)
 
         })
+        // const comparedCustomer = customer;
         $confirmButton.on('click', ()=>{
             if (player.constructedPizza.length < 4){
                 $updatingText.text('You must put 4 toppings on!')
@@ -77,7 +78,8 @@ const gameLogic = {
                 console.log('not enough')
                 
             } else {
-                console.log ('time to compare!')
+            
+                gameLogic.comparePizzas(customer, player)
             }
 
 
@@ -113,6 +115,7 @@ const gameLogic = {
         // if (day === 0) {
         //     console.log(`Hi ${player.name}! My name is ${customer.name}. Can you please make me a pizza with ${customer.favToppings[0].name}, ${customer.favToppings[1].name}, ${customer.favToppings[2].name}, and ${customer.favToppings[3].name}? Thanks!`)
         // } else {
+            gameLogic.removeAllToppings(player)
             const $updatingText = $('#updatingText')
             const $oldOkButton = $('.okButton')
             $oldOkButton.remove()
@@ -139,13 +142,14 @@ const gameLogic = {
         }
         
 
-        const playerConstructedObjArr = Array.from(Object.values(player.constructedPizza))
-        const playerConstructedList = [];
-        for (let i = 0; i < 4; i++) {
-            playerConstructedList.push(playerConstructedObjArr[i].name)
-        }
+        // const playerConstructedObjArr = Array.from(Object.values(player.constructedPizza))
+        // const playerConstructedList = [];
+        const playerConstructedList = player.constructedPizza
+        // for (let i = 0; i < 4; i++) {
+        //     playerConstructedList.push(playerConstructedObjArr[i].name)
+        // }
     
-        // console.log(customerToppingList, playerConstructedList)
+        console.log(customerToppingList, playerConstructedList)
 
         //making the difference lists and evaluating them
 
@@ -155,23 +159,66 @@ const gameLogic = {
 
         // console.log($whatCustomerWanted)
         // console.log($whatPlayerMade)
-        
-        if ($whatCustomerWanted.length > 2) {
-            console.log('You really screwed up my order. I want a refund!')
-            gameLogic.tipPlayer(player, -15)
-        } else if ($whatCustomerWanted.length === 2) {
-            console.log(`You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead.`)
-        } else if ($whatCustomerWanted.length === 1) {
-            console.log(`It's not perfect, but you did ok. I wanted ${$whatCustomerWanted[0]}, but you gave me ${$whatPlayerMade[0]} instead.`)
+        const $updatingText = $('#updatingText')
+        $updatingText.text('Let\'s see how you did!')
+        const $okButton = $("<button class='okButton'>New OK</button>")
+        $okButton.insertBefore($('.playerScores'))
+        $okButton.on('click', ()=>{
+            $okButton.remove()
+            gameLogic.removeAllToppings(player)
+            if ($whatCustomerWanted.length > 2) {
+                $updatingText.text(`${customer.name.toUpperCase()}: \"You really screwed up my order. I want a refund!\"`)
+                gameLogic.tipPlayer(player, -15)
+                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                $okButton.insertBefore($('.playerScores'))
+                $okButton.on('click', gameLogic.runNormalDayLoop)
+                // const $p1Money = $('.p1Money')
+                // $p1Money.text(`$${player1.money}`)
+                // const $p2Money = $('.p2Money')
+                // $p2Money.text(`$${player2.money}`)
+            } else if ($whatCustomerWanted.length === 2) {
+                // console.log(`You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead.`)
+                $updatingText.text(`${customer.name.toUpperCase()}: \"You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead."`)
+                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                $okButton.insertBefore($('.playerScores'))
+                $okButton.on('click', gameLogic.runNormalDayLoop)
+                // const $p1Money = $('.p1Money')
+                // $p1Money.text(`$${player1.money}`)
+                // const $p2Money = $('.p2Money')
+                // $p2Money.text(`$${player2.money}`)
+            } else if ($whatCustomerWanted.length === 1) {
+                // console.log(`It's not perfect, but you did ok. I wanted ${$whatCustomerWanted[0]}, but you gave me ${$whatPlayerMade[0]} instead.`)
+                $updatingText.text(`${customer.name.toUpperCase()}: \"It's not perfect, but you did ok. I wanted ${$whatCustomerWanted[0]}, but you gave me ${$whatPlayerMade[0]} instead.\"`)
+                
                 gameLogic.tipPlayer(player, 2)
-        } else {
-            console.log("Nice job... the perfect pizza!")
+                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                $okButton.insertBefore($('.playerScores'))
+                $okButton.on('click', gameLogic.runNormalDayLoop)
+                // const $p1Money = $('.p1Money')
+                // $p1Money.text(`$${player1.money}`)
+                // const $p2Money = $('.p2Money')
+                // $p2Money.text(`$${player2.money}`)
+            } else if ($whatCustomerWanted.length === 0){
+                $updatingText.text(`${customer.name.toUpperCase()}: \"Nice job... the perfect pizza!\"`)
                 gameLogic.tipPlayer(player, 5)
-        }
-        if(player.money < 0) {
-            player.autoLoss = true
-        }
-        
+                const $okButton = $("<button class='okButton'>Back to Loop</button>")
+                $okButton.insertBefore($('.playerScores'))
+                $okButton.on('click', gameLogic.runNormalDayLoop)
+                // const $p1Money = $('.p1Money')
+                // $p1Money.text(`$${player1.money}`)
+                // const $p2Money = $('.p2Money')
+                // $p2Money.text(`$${player2.money}`)
+            }
+            if (player.money < 0) {
+                player.autoLoss = true
+            }
+            
+            // return
+        })
+        const $p1Money = $('.p1Money')
+            $p1Money.text(`$${player1.money}`)
+            const $p2Money = $('.p2Money')
+            $p2Money.text(`$${player2.money}`)
         // console.log('Player money :', player.money)
         // console.log($whatCustomerWanted, $whatPlayerMade)
     },
@@ -207,6 +254,8 @@ const gameLogic = {
         // console.log('made it to day loop')
         // const $startButton = $('#startButton')
         // $startButton.remove()
+        // gameLogic.removeAllToppings(player1)
+        // gameLogic.removeAllToppings(player2)
         const $checkWinButton = $("<button class='okButton'>SEE WINNER</button>")
         const $updatingText = $('#updatingText')
         const $okButton = $("<button class='okButton'>New OK</button>")
@@ -218,12 +267,15 @@ const gameLogic = {
             $okButton.on('click', () => {
                 // const $newOkButton = $("<button class='okButton'>New OK</button>")
                 // $newOkButton.insertBefore($('.playerScores'))
-                console.log('clicking through', day)
+
+                // console.log('clicking through', day)
                 const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
-                const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
-                console.log('paper')
+                // const todaysCustomerP2 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                // console.log('paper')
                 gameLogic.askForPizza(todaysCustomerP1, player1)
-                console.log('plastic')
+                // console.log('plastic')
+                // gameLogic.askForPizza(todaysCustomerP2, player2)
+
                 // gameLogic.playerMakesPizza(todaysCustomerP1, player1)
                 // console.log('cloth')
                 // $newOkButton.on('click', ()=>{
@@ -231,7 +283,7 @@ const gameLogic = {
                 //     day++;
                 //     $newOkButton.remove()
                 day++
-                // $okButton.remove()
+                $okButton.remove()
                 // gameLogic.runNormalDayLoop()  
             })
         
@@ -410,7 +462,7 @@ const gameLogic = {
         const firstPlayerInput = event => {
             if (event.key === 'Enter') {
                 if ($firstInput.val() === '') {
-                    $firstInput.val('Player 1')
+                    $firstInput.val('Pizza Genius')
                 }
                 // console.log($firstInput.val())
                 const $oldPlayer1Name = $('#oldPlayer1Name')
@@ -421,8 +473,10 @@ const gameLogic = {
                 $newPlayer1.prependTo($('#player1'))
                 $firstInput.remove()
                 player1.name = $firstInput.val()
-                $secondInput.appendTo($('.dialogue'))
-                $updatingText.text('Excellent! Let\'s put in Player 2\'s name.')
+                // $secondInput.appendTo($('.dialogue'))
+                // $updatingText.text('Excellent! Let\'s put in Player 2\'s name.')
+                $okButton.insertBefore($('.playerScores'))
+                $updatingText.text('The owner of ARETE PIZZA is looking for a new genius cook. Can you serve up perfect pizzas to his starving customers? Let\'s find out!')
             }
         }
 
