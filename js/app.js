@@ -1,6 +1,6 @@
 // console.log($)
 
-$( ()=>{
+
 
 const gameLogic = {
     randGen: (num)=>{
@@ -402,20 +402,25 @@ const gameAssets = {
 
         return toppingsList
     },
-    makeCustomerToppings: ()=>{
+    makeCustomerToppings: (veggieOrMeat)=>{
         const favToppingsSet = new Set()
         while (favToppingsSet.size < 4) {
-            favToppingsSet.add(toppingsList[gameLogic.randGen(toppingsList.length)])
+            if (veggieOrMeat === 'veggie') {
+                favToppingsSet.add(toppingsList[gameLogic.randGen(toppingsList.length/2)])
+            } else {
+            favToppingsSet.add(toppingsList[gameLogic.randGen(toppingsList.length)])}
         }
         const favToppingsList = Array.from(favToppingsSet)
         return favToppingsList;
     },  
     customer: class Customer {
-        constructor(name) {
+        constructor(name, isVegetarian) {
             this.name = name;
-            this.isVegetarian = false;
+            this.isVegetarian = isVegetarian;
             //for now, hardcoded. Veggie mode is a stretch
-            this.favToppings = gameAssets.makeCustomerToppings()
+            this.favToppings = this.isVegetarian ? gameAssets.makeCustomerToppings('veggie') : gameAssets.makeCustomerToppings('meat')
+            // gameAssets.makeCustomerToppings()
+        
         }
         sayHello() {
             console.log(`Hello, I\'m ${this.name}`);
@@ -435,12 +440,12 @@ gameAssets.makeToppingList()
 
 let day = 0;
 
-const ruthie = new gameAssets.customer('Ruthie')
-const kathleen = new gameAssets.customer('Kathleen')
-const chris = new gameAssets.customer('Chris')
-const greg = new gameAssets.customer('Greg')
-const margaret = new gameAssets.customer('Margaret')
-const michelle = new gameAssets.customer('Michelle')
+const ruthie = new gameAssets.customer('Ruthie', false)
+const kathleen = new gameAssets.customer('Kathleen', false)
+const chris = new gameAssets.customer('Chris', false)
+const greg = new gameAssets.customer('Greg', false)
+const margaret = new gameAssets.customer('Margaret', false)
+const michelle = new gameAssets.customer('Michelle', true)
 
 const fullCustomerList = [ruthie, kathleen, chris, greg, margaret, michelle]
 
@@ -450,5 +455,5 @@ const player1 = new gameAssets.player('Player 1')
 
 gameLogic.startGame()
 
-
+$( ()=>{
 });
