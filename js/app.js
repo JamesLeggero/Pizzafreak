@@ -279,8 +279,8 @@ const gameLogic = {
                     gameLogic.checkAutoLoss()
                     return
                 }
-                // const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
-                const todaysCustomerP1 = michelle
+                const todaysCustomerP1 = fullCustomerList[gameLogic.randGen(fullCustomerList.length)];
+                // const todaysCustomerP1 = michelle
                 gameLogic.askForPizza(todaysCustomerP1, player1)
             })
             } else {
