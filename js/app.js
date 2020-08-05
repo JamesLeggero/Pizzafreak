@@ -21,7 +21,7 @@ const gameLogic = {
         // const $okButton = $("<button class='okButton'>New OK</button>")
         // $okButton.insertBefore($('.playerScores'))
         const $updatingText = $('#updatingText')
-        $updatingText.text(`${player.name} is making a pizza for ${customer.name}`)
+        $updatingText.text(`${player.name} is making a pizza for ${customer.name}. Click on a topping to add it to the pizza!`)
         player.constructedPizza = []
         console.log('made it to playerMakesPizza 1)')
         gameAssets.makeToppingList()
@@ -74,7 +74,7 @@ const gameLogic = {
             if (player.constructedPizza.length < 4){
                 $updatingText.text('You must put 4 toppings on!')
                 // window.setTimeout($updatingText.text(`${player.name} is making a pizza for ${customer.name}`), 2000)
-                setTimeout(()=>{$updatingText.text(`${player.name} is making a pizza for ${customer.name}`)}, 3000)
+                setTimeout(()=>{$updatingText.text(`${player.name} is making a pizza for ${customer.name}. Click on a topping to add it to the pizza!`)}, 3000)
                 // console.log('not enough')
                 
             } else {
@@ -121,7 +121,7 @@ const gameLogic = {
             const $oldOkButton = $('.okButton')
             $oldOkButton.remove()
             $updatingText.text(`Hey ${player.name}, it's me, ${customer.name}! Just the usual, please.`)
-            const $newOkButton = $("<button class='okButton'>Ask OK</button>")
+            const $newOkButton = $("<button class='okButton'>OK</button>")
             $newOkButton.insertBefore($('.playerScores'))
             $newOkButton.on('click', ()=>{
                 $newOkButton.remove()
@@ -168,7 +168,7 @@ const gameLogic = {
         // console.log($whatPlayerMade)
         const $updatingText = $('#updatingText')
         $updatingText.text('Let\'s see how you did!')
-        const $okButton = $("<button class='okButton'>New OK</button>")
+        const $okButton = $("<button class='okButton'>OK</button>")
         $okButton.insertBefore($('.playerScores'))
         $okButton.on('click', ()=>{
             $okButton.remove()
@@ -176,7 +176,7 @@ const gameLogic = {
             if ($whatCustomerWanted.length > 2) {
                 $updatingText.text(`${customer.name.toUpperCase()}: \"You really screwed up my order. I want a refund!\"`)
                 gameLogic.tipPlayer(player, -15)
-                const $okButton = $("<button class='okButton'>Back to Loop A</button>")
+                const $okButton = $("<button class='okButton'>REFUND: You lose $15</button>")
                 $okButton.insertBefore($('.playerScores'))
                 $okButton.on('click', ()=>{
                     gameLogic.removeAllToppings(player)
@@ -191,7 +191,7 @@ const gameLogic = {
             } else if ($whatCustomerWanted.length === 2) {
                 // console.log(`You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead.`)
                 $updatingText.text(`${customer.name.toUpperCase()}: \"You're not great at this. I wanted ${$whatCustomerWanted[0]} and ${$whatCustomerWanted[1]}, but you gave me ${$whatPlayerMade[0]} and ${$whatPlayerMade[1]} instead."`)
-                const $okButton = $("<button class='okButton'>Back to Loop B</button>")
+                const $okButton = $("<button class='okButton'>No tip</button>")
                 $okButton.insertBefore($('.playerScores'))
                 $okButton.on('click', ()=>{
                     gameLogic.removeAllToppings(player)
@@ -208,7 +208,7 @@ const gameLogic = {
                 $updatingText.text(`${customer.name.toUpperCase()}: \"It's not perfect, but you did ok. I wanted ${$whatCustomerWanted[0]}, but you gave me ${$whatPlayerMade[0]} instead.\"`)
                 
                 gameLogic.tipPlayer(player, 5)
-                const $okButton = $("<button class='okButton'>Back to Loop C</button>")
+                const $okButton = $("<button class='okButton'>You made $5</button>")
                 $okButton.insertBefore($('.playerScores'))
                 $okButton.on('click', ()=>{
                     gameLogic.removeAllToppings(player)
@@ -223,7 +223,7 @@ const gameLogic = {
             } else if ($whatCustomerWanted.length === 0){
                 $updatingText.text(`${customer.name.toUpperCase()}: \"Nice job... the perfect pizza!\"`)
                 gameLogic.tipPlayer(player, 10)
-                const $okButton = $("<button class='okButton'>Back to Loop D</button>")
+                const $okButton = $("<button class='okButton'>You made $10</button>")
                 $okButton.insertBefore($('.playerScores'))
                 $okButton.on('click', ()=>{
                     gameLogic.removeAllToppings(player)
@@ -283,13 +283,13 @@ const gameLogic = {
         //     console.log(`${player2.name}, the pizza whisperer. Come back new week!`)
         // }
         if (player1.money > 24) {
-            $updatingText.text('You\'re a serious pizza whisperer. Welcome aboard!')
+            $updatingText.text('\"You\'re a serious pizzafreak. Welcome aboard!\"')
         } else if (player1.money > 14) {
-            $updatingText.text('Eh, your\'re ok. We can throw you some part-time work.')
+            $updatingText.text('\"Eh, your\'re ok. We can throw you some part-time work.\"')
         } else if (player1.money > 0) {
-            $updatingText.text('Not interested. You just can\'t hack it in the worlda pizza. Scram!')
+            $updatingText.text('\"Not interested. You just can\'t hack it in the worlda pizza. Scram!\"')
         } else {
-            $updatingText.text('You cost me money this week. I oughtta wring your neck! Vamoose!!')
+            $updatingText.text('\"You cost me money this week. I oughta wring your neck! Vamoose!!\"')
         }
 
 
@@ -309,7 +309,7 @@ const gameLogic = {
         day++
         const $checkWinButton = $("<button class='okButton'>FINAL RESULT</button>")
         const $updatingText = $('#updatingText')
-        const $okButton = $("<button class='okButton'>New OK</button>")
+        const $okButton = $("<button class='okButton'>OK</button>")
         // const $startButton = $('#startButton')
         if (day < 4) {
             $updatingText.text(`It's Day ${day}. Let's make some freakin' pizza!!`)
@@ -437,7 +437,7 @@ const gameLogic = {
                                     $okButton.insertBefore($('.playerScores'))
 
                                     $okButton.on('click', () => {
-                                        $updatingText.text("\"Alright, now get to studyin\'! You both start tomorrow!\"")
+                                        $updatingText.text("\"Alright, now get to studyin\'! You start tomorrow!\"")
                                         $okButton.remove()
                                         const $startButton = $("<button class='okButton'id='startButton'>START</button>")
                                         $startButton.insertBefore($('.playerScores'))
