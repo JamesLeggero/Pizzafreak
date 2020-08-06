@@ -67,6 +67,8 @@ const gameLogic = {
             
                 gameLogic.comparePizzas(customer, player)
                 $topping.off('click', moveToppingToPizza)
+                $remakeButton.remove()
+                $confirmButton.remove()
             }
 
 
@@ -210,7 +212,7 @@ const gameLogic = {
         const $checkLoseButton = $('.okButton')
         const $playAgainBtn = $("<button class='okButton'>PLAY AGAIN</button>")
         $checkLoseButton.remove()
-        $updatingText.text(`${player1.name.toUpperCase()}!!! I just got a call that you put meat on a vegetarian\'s pizza yesterday. This is unacceptable! GET OUT!!!`)
+        $updatingText.text(`\"${player1.name.toUpperCase()}!!! I just got a call that you put meat on a vegetarian\'s pizza yesterday. This is unacceptable! GET OUT!!!\"`)
         $playAgainBtn.insertBefore($('.playerScores'))
         $playAgainBtn.on('click', ()=>{
             window.location.reload();
